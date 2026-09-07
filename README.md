@@ -10,6 +10,7 @@
 ### 视频多模态 AI 分析工具 (video-analyzer)
 
 `Python` `faster-whisper` `PyAV` `OpenAI Compatible API` `NiceGUI`
+→ [架构设计文档](https://github.com/voidleap-dev/video-analyzer-arch)
 
 视频链接 → 下载 → 转写/抽帧 → 多级 AI 分析 → Markdown 深度报告。
 
@@ -23,6 +24,7 @@
 ### 本地大模型浏览器翻译扩展 (auto-translator)
 
 `TypeScript` `React` `WXT` `Manifest V3` `Ollama`
+→ [架构设计文档](https://github.com/voidleap-dev/auto-translator-arch)
 
 基于本地小模型的浏览器翻译扩展，零 API 成本。
 
@@ -36,6 +38,7 @@
 ### 人脸识别考勤系统 (face-system)
 
 `Python` `OpenCV` `ONNX Runtime GPU` `SCRFD` `ArcFace` `Tkinter`
+→ [架构设计文档](https://github.com/voidleap-dev/face-system-arch)
 
 摄像头采集 → 人脸检测 → 特征提取 → 余弦相似度匹配 → 考勤记录。
 
@@ -49,6 +52,7 @@
 ### 沈阳美食推荐平台 (小众点评)
 
 `Astro` `TypeScript` `Supabase` `PostgreSQL` `Cloudflare Pages` `R2`
+→ [架构设计文档](https://github.com/voidleap-dev/xiaozhong-dianping-arch)
 
 已上线运营的美食推荐产品。
 
@@ -62,6 +66,7 @@
 ### ESP32 四足仿生机器人
 
 `C` `Arduino` `ESP32` `PWM` `WiFi WebServer` `超声波`
+→ [嵌入式项目文档](https://github.com/voidleap-dev/embedded-projects)
 
 12 自由度四足机器人，团队项目，负责设备控制代码调试。
 
@@ -75,6 +80,7 @@
 ### 51 单片机 & STM32 开发
 
 `C` `Keil5` `STM32CubeIDE` `I2C` `SPI` `UART` `PWM`
+→ [嵌入式项目文档](https://github.com/voidleap-dev/embedded-projects)
 
 - 51 单片机（STC89C52RC）：LCD1602 / DS1302 / AT24C02 / 数码管 / 红外 / DS18B20 / 蜂鸣器，8 个外设驱动模块
 - STM32F103C8T6：74HC595 驱动 8x8 点阵 LED，横向滚动 + 字模提取 + 亮度调节
