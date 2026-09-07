@@ -12,7 +12,7 @@
 `Python` `faster-whisper` `PyAV` `OpenAI Compatible API` `NiceGUI`
 → [架构设计文档](https://github.com/voidleap-dev/video-analyzer-arch)
 
-视频链接 → 下载 → 转写/抽帧 → 多级 AI 分析 → Markdown 深度报告。
+视频链接 → 下载 → 转写/抽帧 → 三级 AI 分析 → Markdown 深度报告。
 
 - 多模型有序兜底链，未配 Key 的层自动跳过
 - Token 用量统计、失败重试与降级策略
