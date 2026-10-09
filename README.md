@@ -1,7 +1,12 @@
 ### Hi, I'm voidleap-dev
 
-专注 **AI 应用工程** 与 **嵌入式开发** 交叉方向。
-独立交付可运行的 AI 工具链和线上产品。
+**AI 应用工程**方向：独立把 LLM / RAG / Agent 从零散脚本做成可运行、可服务化、可评估的完整链路。
+
+🔍 求职意向：**AI 应用开发 / 大模型应用工程**（2027 届）。
+
+📫 联系方式：3393949270@qq.com
+
+> 说明：以下每个产品级项目的**可运行源码为私有仓库**（含部署配置与真实数据），公开的是**架构设计、工程决策与踩坑**文档，用于展示设计与实现能力。
 
 ---
 
@@ -9,15 +14,17 @@
 
 ### 视频多模态 AI 分析工具 (video-analyzer)
 
-`Python` `faster-whisper` `PyAV` `OpenAI Compatible API` `NiceGUI`
+`Python` `faster-whisper` `PyAV` `OpenAI Compatible API` `ChromaDB` `bge` `LangGraph` `FastAPI + SSE` `MCP` `NiceGUI`
 → [架构设计文档](https://github.com/voidleap-dev/video-analyzer-arch)
 
-视频链接 → 下载 → 转写/抽帧 → 三级 AI 分析 → Markdown 深度报告。
+视频链接 → 下载 → 转写/抽帧 → 三级 AI 分析 → Markdown 报告，并把产出沉淀成 RAG 知识库 + LangGraph Agent，服务化为 FastAPI+SSE、封装成 MCP 工具。
 
-- 多模型有序兜底链，未配 Key 的层自动跳过
-- Token 用量统计、失败重试与降级策略
-- audio / visual / full 三种分析模式
-- NiceGUI 实时进度仪表盘
+- 多模型有序兜底链（百炼 → DeepSeek → 智谱），未配 Key 的层自动跳过
+- **RAG 知识库**：bge 非对称检索 + Chroma + 向量/BM25 RRF 混合检索，检索增强问答带引用溯源
+- **Agent 化**：LangGraph ReAct 循环，把 RAG/计算工具交给模型自主编排调用
+- **RAG 评估**：按 RAGAS 口径自实现 recall/precision + faithfulness/relevancy（LLM-as-judge）
+- **服务化**：FastAPI + SSE 流式问答 + Docker（只打包 RAG 服务层）；能力再封装为 MCP Server
+- Token 用量追踪、NiceGUI 实时进度仪表盘
 
 ---
 
@@ -26,12 +33,11 @@
 `TypeScript` `React` `WXT` `Manifest V3` `Ollama`
 → [架构设计文档](https://github.com/voidleap-dev/auto-translator-arch)
 
-基于本地小模型的浏览器翻译扩展，零 API 成本。
+基于本地小模型的浏览器翻译扩展，零 API 成本，双语对照注入。
 
-- Background Service Worker 中转请求，解决 content script 跨域限制
-- 并发队列 + 超时 + 失败重试
-- 选区识别 → 上下文组装 → 模型调用 → 双语注入
-- 配置缓存随 storage 变化自动失效
+- Background Service Worker 中转请求，绕过 content script 跨域与 CSP 限制
+- 并发队列 + 超时 + 失败重试；配置缓存随 storage 变化自动失效
+- 选区识别 → 上下文组装 → 模型调用 → 双语注入；Shadow DOM 隔离注入样式
 
 ---
 
@@ -42,10 +48,9 @@
 
 摄像头采集 → 人脸检测 → 特征提取 → 余弦相似度匹配 → 考勤记录。
 
-- GPU 加速实时推理
-- 3 线程架构（采集 / 处理 / UI 分离）
+- GPU 加速实时推理，三线程架构（采集 / 处理 / UI 分离）
 - 摄像头断线恢复、热插拔检测、陌生人抓拍去重
-- 活体检测 + 距离提示 + 日志导出
+- 活体检测 + 距离提示；生物特征数据绝不入 Git 的隐私设计
 
 ---
 
@@ -54,36 +59,11 @@
 `Astro` `TypeScript` `Supabase` `PostgreSQL` `Cloudflare Pages` `R2`
 → [架构设计文档](https://github.com/voidleap-dev/xiaozhong-dianping-arch)
 
-已上线运营的美食推荐产品。
+全链路独立交付的线上运营产品（需求 → 交互 → 数据模型 → 部署 → 运维）。
 
-- 全链路独立交付：需求 → 交互 → 数据模型 → 部署 → 运营维护
-- 服务端 admin 鉴权 + Supabase RLS 行级安全
-- R2 图片存储 + Cloudflare Pages 全球 CDN
-- 用户提交审核制
-
----
-
-### ESP32 四足仿生机器人
-
-`C` `Arduino` `ESP32` `PWM` `WiFi WebServer` `超声波`
-→ [嵌入式项目文档](https://github.com/voidleap-dev/embedded-projects)
-
-12 自由度四足机器人，团队项目，负责设备控制代码调试。
-
-- 12 路舵机 PWM 配置与零位标定
-- ESP32 热点 + WebServer 网页控制
-- 超声波避障逻辑集成
-- 排查舵机反向、角度偏差、供电压降异常
-
----
-
-### 51 单片机 & STM32 开发
-
-`C` `Keil5` `STM32CubeIDE` `I2C` `SPI` `UART` `PWM`
-→ [嵌入式项目文档](https://github.com/voidleap-dev/embedded-projects)
-
-- 51 单片机（STC89C52RC）：LCD1602 / DS1302 / AT24C02 / 数码管 / 红外 / DS18B20 / 蜂鸣器，8 个外设驱动模块
-- STM32F103C8T6：74HC595 驱动 8x8 点阵 LED，横向滚动 + 字模提取 + 亮度调节
+- 服务端代理 + Supabase RLS 行级安全 + CF Secret 三层密钥防护
+- R2 图片存储 + Cloudflare Pages 全球 CDN；用户提交审核制
+- GitHub Actions 构建门禁（类型检查 + 密钥扫描）
 
 ---
 
@@ -91,8 +71,7 @@
 
 | 方向 | 技术 |
 |------|------|
-| AI 应用 | Python, OpenAI Compatible API, Ollama, Prompt Engineering, Multi-model Fallback |
-| 视觉推理 | OpenCV, ONNX Runtime GPU, SCRFD, ArcFace, faster-whisper |
-| 全栈工程 | TypeScript, React, Astro, Supabase, Cloudflare Pages, WXT (MV3) |
-| 嵌入式 | C, ESP32, STM32, 51单片机, Arduino, Keil5, PWM, I2C/SPI/UART |
-| 工具链 | Git, GitHub Actions, NiceGUI, Tkinter, PyInstaller |
+| **AI 应用（主线）** | Python, OpenAI Compatible API, RAG(ChromaDB+bge+RRF), LangGraph Agent, RAGAS 口径评估, FastAPI+SSE, MCP, Ollama, Prompt Engineering, Multi-model Fallback |
+| 多模态/推理 | faster-whisper, PyAV, OpenCV, ONNX Runtime GPU, SCRFD, ArcFace |
+| 全栈工程 | TypeScript, React, Astro, Supabase, Cloudflare Pages/R2, WXT(MV3) |
+| 工具链 | Git, GitHub Actions, Docker, NiceGUI, Tkinter, PyInstaller |
